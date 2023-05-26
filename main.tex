@@ -1,0 +1,50 @@
+\documentclass[11pt]{article}
+
+\usepackage{ctex}
+\usepackage[paper=b5paper]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[toc]{multitoc}
+\usepackage{biblatex}
+\usepackage[colorlinks]{hyperref}
+
+\addbibresource{biblio.bib}
+\defbibheading{bibliography}[本笔记用到的参考文献]{\subsection*{#1}}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{defn}{定义}[section]
+% \newtheorem{sym}[defn]{记号}
+\newtheorem{eg}[defn]{例}
+\theoremstyle{plain}
+\newtheorem{thm}[defn]{定理}
+\newtheorem{lem}[defn]{引理}
+\newtheorem{col}[defn]{推论}
+\newtheorem{prop}[defn]{命题}
+% \newtheorem*{pro}{问题}
+\theoremstyle{remark}
+\newtheorem{rem}[defn]{评注}
+% \newtheorem{ex}[defn]{习题}
+
+\title{域与Galois理论笔记}
+\author{魔法少女Alkali}
+\date{最后编译: \today}
+
+\begin{document}
+\maketitle
+
+\section{前言}
+这份笔记是笔者学习Fields奖得主Richard Borcherds所讲授的网课\textit{Galois Theory} (链接:~\href{https://www.youtube.com/watch?v=ccc4EYeytYo}{YouTube}~或~\href{https://www.bilibili.com/video/BV1Uy4y1i7sh}{bilibili}) 时记录的笔记.
+原始的笔记是英文的, 但笔者思考之后决定还是使用中文整理出最终的笔记.
+
+这份笔记不是网课的逐字稿, Borcherds教授所讲的内容中有些部分没有被记录下来 (例如正十七边形的具体构造), 也有一些教授略过的部分被详细地补充 (例如任意集合的分裂域的同构延拓定理).
+更多地, 这份笔记被整理成了笔者心目中适合自己和他人阅读的模样.
+因此, 这份笔记便不可避免地带有了笔者的个人色彩, 从而许多地方的讲法与证明并不一定是最好的.
+更为致命的是, 本份笔记是作者为备考中科院2023年``代数与数论''暑期学校而突击整理的笔记 (虽然最终没能在考前整理出来), 因此错误应当俯拾即是, 所以还盼望读者指正.
+
+联系我可以通过\href{mailto:matthewzenm@icloud.com}{我的邮箱}.
+\nocite{*}
+\printbibliography
+
+\end{document}
