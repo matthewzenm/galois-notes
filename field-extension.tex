@@ -1,1 +1,134 @@
 \section{域扩张}
+
+我们先给出域扩张的定义.
+\begin{defn}
+    设$K,L$是域, 且满足$K\subset L$, 那么称$L$是$K$的一个\textbf{扩域}, 记作$L/K$.
+\end{defn}
+
+\begin{eg}
+    我们最熟悉的扩域的例子是$\mathbb{Q}\subset\mathbb{R}\subset\mathbb{C}$.
+\end{eg}
+
+\begin{defn}设有域扩张$L/K$.
+    \begin{enumerate}
+        \item 定义扩张的\textbf{度数}为$[L:K]=\dim_KL$, 当$[L:K]<\infty$时, 称$L/K$为\textbf{有限扩张};
+        \item 设$\alpha\in L$, 如果$\alpha$是某个多项式$p(x)\in K[x]$的根, 那么称$\alpha$在$K$上是\textbf{代数}的, 否则称为是\textbf{超越}的;
+        \item 设$\alpha$是$K$上的代数元, 设$p(x)\in K[x]$是$\alpha$的极小多项式, 即以$\alpha$为根的次数最低的多项式, 那么定义$\alpha$的度数$\deg\alpha=\deg p(x)$.
+    \end{enumerate}
+\end{defn}
+
+\begin{eg}我们给出一些域扩张的例子.
+    \begin{enumerate}
+        \item 对$\mathbb{Q}\subset\mathbb{R}\subset\mathbb{C}$, 有$[\mathbb{C}:\mathbb{R}]=2,[\mathbb{R}:\mathbb{Q}]=\infty$.
+        (具体而言, $[\mathbb{R}:\mathbb{Q}]=2^{\aleph_0}$)
+        \item 取$K=\mathbb{Q}$, 那么$\alpha=\sqrt[5]{2}$是代数的, $\pi, e\in\mathbb{R}$是超越的.
+        \item 对$\mathbb{Q}\subset\mathbb{Q}(x)$, 即$\mathbb{Q}$上的有理函数域作为$\mathbb{Q}$的扩域, $x$在$\mathbb{Q}$上是超越的.
+        \item $\alpha=\cos(2\pi/7)$是代数的.
+        注意到对$\zeta=e^{2\pi/7}$, 有$\alpha=(\zeta+\zeta^{-1})/2$.
+        而
+        \begin{align*}
+            1+\zeta+\cdots+\zeta^6=0&\implies \zeta^{-3}+\zeta^{-2}+\cdots+1+\cdots+\zeta^3=0\\
+            &\implies (2\alpha)^3+(2\alpha)^2-2(2\alpha)-1=0\\
+            &\iff 8\alpha^3+4\alpha-4\alpha-1=0
+        \end{align*}
+        所以$\alpha$是$\mathbb{Q}$上的代数元.
+    \end{enumerate}
+\end{eg}
+
+\begin{sym}
+    对$L/K$及集合$S\subset L$, 我们记$K(S)$为包含$S$中所有元素的最小的扩域, 并称为\textbf{由$S$生成的扩域}.
+    特别地, 当$S=\{\alpha_1,\cdots,\alpha_n\}$时, 我们记$K(S)=K(\alpha_1,\cdots,\alpha_n)$.
+\end{sym}
+
+考虑由单个代数元$\alpha$生成的扩域, 我们有如下的引理
+\begin{lem}
+    设$L/K$, $\alpha\in L$是$K$上的代数元, 有极小多项式$m(x)\in K[x]$, 那么$K(\alpha)\simeq K[x]/\langle m(x)\rangle$, 其中$\langle m(x)\rangle$是$p(x)$生成的理想.
+\end{lem}
+\begin{proof}
+    定义同态
+    \begin{align*}
+        \varphi:K[x]&\to K(\alpha)\\
+        p(x)&\mapsto p(\alpha)
+    \end{align*}
+    考虑核$\ker\varphi$, 显然$\ker\varphi\neq K[x]$, 且极小多项式$m(x)\in\ker\varphi$.
+    由于$K[x]$是主理想整环, $\ker\varphi$单生成, 且生成元整除$m(x)$.
+    但容易证明$m(x)$是不可约多项式, 结合$\ker\varphi\neq K[x]$可知生成元与$m(x)$相伴, 从而$\ker\varphi=\langle m(x)\rangle$.
+    由第一同构定理即知
+    \[K(\alpha)\simeq \frac{K[x]}{\langle m(x)\rangle}\qedhere\]
+\end{proof}
+
+关于有限扩张与代数扩张, 有如下的结论
+\begin{thm}
+    设有域扩张$M/K$, $\alpha\in M$是$K$上的代数元当且仅当$\alpha$包含在$K$的一个有限扩张中.
+\end{thm}
+\begin{proof}
+    一方面, 假设$\alpha$是代数元, 那么$\alpha\in K(\alpha)$.
+    设$\deg\alpha=n$, 那么$1,\alpha,\cdots,\alpha^{n-1}$是$K(\alpha)$的一组基, $K(\alpha)/K$是有限扩张.
+    另一方面, 假设$\alpha$包含在$K$的有限扩张中, 不妨设$[M:K]=n<\infty$.
+    那么$1,\alpha,\cdots,\alpha^{n-1},\alpha^n$一定线性相关, 从而$\alpha$是一个多项式的根, 是一个代数元.
+\end{proof}
+
+\begin{thm}[望远镜公式]\label{telescope}
+    设$K\subset L\subset M$均为有限扩张, 那么有$[M:K]=[M:L][L:K]$
+\end{thm}
+\begin{proof}
+    设$x_1,\cdots,x_m$是$L/K$的一组基, $y_1,\cdots,y_n$是$M/L$的一组基.
+    我们考虑$\{x_iy_j\}_{(i,j)\subset [m]\times[n]}$\footnote{$[m]=\{1,\cdots,m\}$, 组合数学中的常用记号.}.
+    首先对$a_{ij}\in K$及指标$(i,j)\in R\times S\subset [m]\times[n]$有
+    \begin{align*}
+        &\sum_{(i,j)\in R\times S}a_{ij}(x_iy_j)=0\\
+        \implies&\sum_{j\in S}a_{ij}y_j=0,\ \forall i\in R\\
+        \implies&a_{ij}=0,\ \forall (i,j)\in R\times S
+    \end{align*}
+    所以$x_iy_j$线性无关.
+    其次, 显然$M$中的每个元素可以表示为$x_iy_j$的$K$--线性组合, 所以$\{x_iy_j\}_{(i,j)\subset [m]\times[n]}$是$M/L$的一组基.
+    从而命题得证.
+\end{proof}
+
+通过望远镜公式, 我们可以证明
+\begin{thm}
+    设$\alpha,\beta$是$K$上的代数元, 那么$\alpha\pm\beta,\alpha\beta,\alpha/\beta(\beta\neq 0)$均为$K$上的代数元.
+\end{thm}
+\begin{proof}
+    考虑扩张链$K\subset K(\alpha)\subset K(\alpha,\beta)$, 两个扩张均为代数扩张, 所以都是有限扩张.
+    由定理~\ref{telescope}, $K(\alpha,\beta)/K$是代数扩张.
+    而$\alpha\pm\beta,\alpha\beta,\alpha/\beta$均包含在$K(\alpha,\beta)$中, 所以都是代数元.
+\end{proof}
+
+\begin{thm}\label{algcoef}
+    设$\alpha$是一个由$K$上代数元系数构成的多项式的根, 那么$\alpha$是代数的.
+\end{thm}
+\begin{proof}
+    设
+    \[\alpha^n+a_{n-1}\alpha^{n-1}+\cdots+a_0=0\]
+    且$a_{n-1},\cdots,a_0$均为$K$上代数元.
+    考虑域扩张链
+    \begin{align*}
+        K&\subset K(a_0)\\
+        &\subset K(a_0,a_1)\\
+        &\cdots\\
+        &\subset K(a_0,\cdots,a_{n-1})\\
+        &\subset K(a_0,\cdots,a_{n-1},\alpha)
+    \end{align*}
+    前$n$步扩张每一步都是添加一个代数元$a_i$, 所以都是有限的, 因此$K$上的扩域$K(a_0,\cdots,a_{n-1})$是有限的.
+    而由假设, $\alpha$在$K(a_0,\cdots,a_{n-1})$上代数, 所以最后一步扩张也是有限的.
+    因此扩张$K(a_0,\cdots,a_{n-1},\alpha)/K$是有限的, 从而$\alpha$是$K$上代数元.
+\end{proof}
+
+而关于超越元, 我们已知$e,\pi$在$\mathbb{Q}$上是超越的, 但是有如下的公开问题
+\begin{pro}
+    $e+\pi,e\pi$在有理数域上超越吗?
+\end{pro}
+
+不过我们可以有这样的结论
+\begin{prop}
+    $e+\pi,e\pi$至多有一个是代数的.
+\end{prop}
+\begin{proof}
+    否则$e+\pi,e\pi$都是代数的, 由定理~\ref{algcoef}~可知方程
+    \begin{equation}
+        x^2-(e+\pi)x+e\pi=0\label{e and pi}
+    \end{equation}
+    的根是代数的.
+    但方程~\eqref{e and pi}~的根是$e$和$\pi$, 这与我们已知的$e$与$\pi$的超越性矛盾.
+\end{proof}
