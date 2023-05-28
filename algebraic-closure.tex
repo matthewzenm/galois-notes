@@ -1,0 +1,32 @@
+\section{代数闭包}
+\begin{defn}
+    设$K$是一个域, 如果扩域$\overline{K}/K$满足
+    \begin{enumerate}[(1)]
+        \item $K[x]$中的任意多项式在$\overline{K}$中均分裂;
+        \item $\overline{K}$由$K[x]$中多项式的根生成,
+    \end{enumerate}
+    那么称$\overline{K}$是$K$的\textbf{代数闭包}.
+\end{defn}
+
+我们给出代数闭包的构造.
+\begin{thm}
+    任意域$K$均存在代数闭包.
+\end{thm}
+\begin{proof}
+    使用良序定理 (\parencite[附录2, 定理4.1]{Lang}) 在$K[x]$上赋予良序$(K[x],\prec)$.
+    对任意一条链$c:p_1\prec p_2\prec\cdots$, 我们取$K_0=K$, $K_1$为$p_1$在$K_0$上的分裂域, $K_2$为$p_2$在$K_1$上的分裂域, 得到域扩张链
+    \[F_c:K_0\subset K_1\subset K_2\subset\cdots\]
+    考虑$K^c=\bigcup_{i\in\mathbb{N}}K_i$, 那么$K^c$是$F_c$的上界, 并且$K^c$恰好包含了$c$中所有多项式的根.
+    取$X$是每一条链$F_c$与$K^c$的集合, 那么由Zorn引理 (\parencite[附录2第2节]{Lang}), $X$中存在极大元$\overline{K}$.
+    一方面, 任意$p(x)\in K[x]$都在$\overline{K}$中分裂, 否则具有$p(x)$的一个根$\alpha$使得$\overline{K}\subsetneq\overline{K}(\alpha)$, 与$\overline{K}$的极大性矛盾.
+    另一方面, $X$中没有添加$K[x]$中多项式的根以外的元素, 所以$\overline{K}$恰好由$K[x]$中多项式的根生成.
+    因此$\overline{K}$就是$K$的代数闭包.
+\end{proof}
+
+关于代数闭包, 有一个密切相关的概念是代数闭域:
+\begin{defn}
+    域$L$被称为是\textbf{代数闭域}, 如果$L[x]$中的任意多项式都在$L$中有根.
+\end{defn}
+\begin{prop}
+    域$K$的代数闭包$\overline{K}$是代数闭域.
+\end{prop}
