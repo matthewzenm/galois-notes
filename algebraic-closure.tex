@@ -12,15 +12,39 @@
 \begin{thm}
     任意域$K$均存在代数闭包.
 \end{thm}
+\begin{lem}
+    设$L/K$是代数扩张, 那么有$|L|\leq\max\{|K|,|\mathbb{N}|\}$.
+\end{lem}
 \begin{proof}
-    使用良序定理 (\parencite[附录2, 定理4.1]{Lang}) 在$K[x]$上赋予良序$(K[x],\prec)$.
-    对任意一条链$c:p_1\prec p_2\prec\cdots$, 我们取$K_0=K$, $K_1$为$p_1$在$K_0$上的分裂域, $K_2$为$p_2$在$K_1$上的分裂域, 得到域扩张链
-    \[F_c:K_0\subset K_1\subset K_2\subset\cdots\]
-    考虑$K^c=\bigcup_{i\in\mathbb{N}}K_i$, 那么$K^c$是$F_c$的上界, 并且$K^c$恰好包含了$c$中所有多项式的根.
-    取$X$是每一条链$F_c$与$K^c$的集合, 那么由Zorn引理 (\parencite[附录2第2节]{Lang}), $X$中存在极大元$\overline{K}$.
-    一方面, 任意$p(x)\in K[x]$都在$\overline{K}$中分裂, 否则具有$p(x)$的一个根$\alpha$使得$\overline{K}\subsetneq\overline{K}(\alpha)$, 与$\overline{K}$的极大性矛盾.
-    另一方面, $X$中没有添加$K[x]$中多项式的根以外的元素, 所以$\overline{K}$恰好由$K[x]$中多项式的根生成.
-    因此$\overline{K}$就是$K$的代数闭包.
+    我们有分解
+    \[L=\bigcup_{n\geq 1}\{\alpha\in L:\ \deg\alpha=n\}\]
+    而对每个$\{\alpha\in L:\ \deg\alpha=n\}$中的元素$\alpha$, $\alpha$与另外至多$n-1$个元素与$K$中$n$个系数决定的首一多项式对应, 从而有
+    \[\{\alpha\in L:\ \deg\alpha=n\}\subset [n]\times K^n\]
+    对无限的$K$而言, $|[n]\times K^n|=|K|$, 从而
+    \begin{align*}
+        |L|&=\left|\bigcup_{n\geq 1}\{\alpha\in L:\ \deg\alpha=n\}\right|\\
+        &\leq|\mathbb{N}\times K|\\
+        &=|K|
+    \end{align*}
+    对有限的$F$而言, $|[n]\times K^n|=n|K|^n\leq|\mathbb{N}|$, 此时
+    \begin{align*}
+        |L|&=\left|\bigcup_{n\geq 1}\{\alpha\in L:\ \deg\alpha=n\}\right|\\
+        &\leq|\mathbb{N}\times\mathbb{N}|\\
+        &=|\mathbb{N}|
+    \end{align*}
+    综上, 可以得到
+    \[|L|\leq\max\{|K|,|\mathbb{N}|\}\qedhere\]
+\end{proof}
+\begin{proof}[代数闭包存在性的证明]
+    设$A$是$K$上所有代数扩域的集合.
+    取$S$满足$F\subset S$且$|S|>\max\{|K|,|\mathbb{N}|\}$, 那么由引理, $K$的代数扩张均包含在$S$中, 从而$A\subset\mathcal{P}(S)$是一个集合.
+    使用包含关系作为偏序, 那么注意到对任意一条链$c:(\{K_i\},\subset)$, 易见$\bigcup_{i\geq 1}K_i$是$c$的一个上界.
+    因此由Zorn引理, $A$中存在极大元$M$.
+    断言在$M$中任意$p(x)\in K[x]$分裂.
+    否则假设存在一个$p(x)$在$M$上不能分解为一次因式的乘积, 那么设$p(x)$在$M$上具有分裂域$E$, $E/M,M/K$都是代数扩张, 从而$E/K$是代数扩张 (推论~\ref{alg of alg}), $E\in A$.
+    然而$M\subsetneq E$, 这与$M$在$A$中的极大性矛盾.
+    因此$M$中任意$p(x)\in K[x]$分裂, 取$M$的由$K[x]$中所有多项式的根生成的子域$\overline{K}$即得到$K$的代数闭包.
+    (证明中用到的集合论结论可以参考~\parencite[附录2第2, 3节]{Lang})
 \end{proof}
 
 关于代数闭包, 有一个密切相关的概念是代数闭域:
@@ -30,3 +54,82 @@
 \begin{prop}
     域$K$的代数闭包$\overline{K}$是代数闭域.
 \end{prop}
+\begin{proof}
+    设$p(x)=x^n+a_{n-1}x^{n-1}+\cdots+a_0,\ a_i\in\overline{K}$.
+    由于$\overline{K}$由$K[x]$中多项式的根生成, 因此$a_i$均为$K$上的代数元.
+    对$p(x)$在某个根$\alpha$, 考虑扩张链
+    \[K\subset K(a_0,\cdots,a_{n-1})\subset K(a_0,\cdots,a_{n-1},\alpha)\]
+    容易发现两个扩张都是有限的, 所以$\alpha$也是$K$上的代数元, 从而在$\overline{K}$内.
+    因此$\overline{K}$是代数闭域.
+\end{proof}
+
+我们接下来讨论一种弱于代数闭的性质.
+我们希望找到一个扩域$L/K$, 使得$L$在开根号下封闭.
+\begin{proof}[构造]
+    想法是不断地添加平方根.
+    取$K_0=K$, $K_1$为$K_0$上所有形如$x^2-a,\ a\in K_0$的多项式的分裂域 (它包含在$K_0$的一个代数闭包中, 所以存在).
+    递归地定义$K_{n+1}$为$K_n$上所有形如$x^2-b,\ b\in K_n$的多项式的分裂域.
+    取$L=\bigcup_{n\in\mathbb{N}}K_n$, 那么容易验证$L$是一个域;
+    同时对任意$\alpha\in L$, 存在某个$K_i$使得$\alpha\in K_i$, 那么$\alpha$的平方根按定义在$K_{i+1}\subset L$中.
+    因此$L$关于开根号封闭.
+\end{proof}
+
+接下来我们给出一些代数闭包的例子.
+\begin{eg}
+    我们最熟悉的代数闭包莫过于$\mathbb{R}$的代数闭包$\mathbb{C}$.
+    这个结论被称为代数基本定理.
+    % 在之后我们会在第~\ref{fta}~节利用Galois理论证明代数基本定理, 但是比较简单的方法是利用复分析中的Liouville定理或者卷绕数.
+    在之后我们会利用Galois理论证明代数基本定理, 但是比较简单的方法是利用复分析中的Liouville定理或者卷绕数.
+    对这些证明, 可以参考~\parencite[命题8.13]{Lvovski}.
+\end{eg}
+
+其他的一些``自然''的代数闭包的例子有
+\begin{eg}
+    \begin{enumerate}
+        \item $\mathbb{C}/\mathbb{R}$;
+        \item 有理数的代数闭包$\overline{\mathbb{Q}}\subset\mathbb{C}$, 称为代数数.
+        \item 考虑形式Laurent级数$\mathbb{C}[[x]][x^{-1}]$, 它的代数闭包被称为Puiseux级数, 即
+        \[\bigcup_{n\geq 1}\mathbb{C}[[x^{1/n}]][x^{-1/n}]\]
+        证明参考~\parencite[命题II.8]{Serre}.
+    \end{enumerate}
+\end{eg}
+
+现在我们证明代数闭包的同构唯一性.
+我们证明一个更强的命题
+\begin{thm}[同构延拓定理]
+    设$K$是一个域, $S\subset K[x]$是一族多项式, $K'$与$K$同构且$S$在同构映射下的像为$S'$.
+    设$E,E'$分别是$S,S'$的分裂域, 那么存在同构$S\to S'$使得下图交换
+    \[\begin{tikzcd}
+        S\ar[r, "\sim"] & S'\\
+        K\ar[u] \ar[r, "\sim"] & K\ar[u]
+    \end{tikzcd}\]
+\end{thm}
+\begin{proof}
+    设$A$是由子域与嵌入$(F,\tau)$构成的集合, 其中$K\subset F\subset E$且使得下图交换
+    \[\begin{tikzcd}
+        E' & & \\
+        K\ar[u, "\sigma"] \ar[r] & F \ar[ul, "\tau"'] \ar[r] & E
+    \end{tikzcd}\]
+    我们在$A$上定义偏序$(F,\tau)\prec(F',\tau')$当且仅当$F\subset F'$且$\tau'|_F=\tau$.
+    对任意一条链$\{(F_i,\tau_i)\}$, 取$F=\bigcup_{i\geq 0}F_i$, $\tau:F\to E'$满足$\tau|_{F_i}=\tau_i$.
+    那么容易验证$(F,\tau)$是这条链的一个上界.
+    由Zorn引理, $A$中存在一个极大元$(M,\tilde{\sigma})$.
+    断言$M=E$. 否则的话存在一个$S$中的多项式$p(x)$在$M$上不分裂, 那么对$p(x)$的一个根$\alpha$, 可以按下图延拓得到$\tilde{\sigma}':M(\alpha)\to E'$
+    \[\begin{tikzcd}
+         & E'\\
+        M(\alpha)\ar[r, "\tilde{\sigma}_\alpha"] \ar[ur, dashed, "\tilde{\sigma}'"] & \tilde{\sigma}(M)(\alpha') \ar[u]\\
+        M \ar[r, "\tilde{\sigma}"] \ar[u] & \tilde{\sigma}(M) \ar[u]
+    \end{tikzcd}\]
+    这与$M$的极大性矛盾, 所以$M=E$.
+    注意到$E$包含了$S$中所有多项式的根, 并被$\tilde{\sigma}$一一地映到$E'$中.
+    而$E'$是包含$S'$中所有多项式的根的最小的域, 所以一定有$\tilde{\sigma}(E)=E'$.
+    因此命题得证.
+\end{proof}
+
+\begin{rem}
+    我们指出代数闭包间的同构也不是唯一的.
+    并且我们也无法``自然''地找出两个代数闭包之间的同构, 也就是说$\overline{K}$的\textbf{绝对Galois群}是没有单位元的.
+    这种情形与拓扑空间$X$中的道路的同伦类$\pi_1(X)$相似: 我们可以定义道路的同伦类之间的乘法, 但是无法自然地找到单位元.
+    在这种情形下, 我们会把$\Aut(\overline{K}/K)$及$\pi_1(X)$称为\textbf{群胚}.
+    在范畴论中, 群胚被定义为所有态射都是同构的范畴.
+\end{rem}
