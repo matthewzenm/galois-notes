@@ -1,0 +1,145 @@
+\section{有限域}
+回忆整数到一个域$K$有一个自然的同态
+\begin{align*}
+    \lambda:\mathbb{Z}&\to K\\
+    m&\mapsto m\cdot 1
+\end{align*}
+如果$\ker\lambda=\mathbb{Z}$, 那么称$K$的\textbf{特征}为$0$;
+如果$\ker\lambda=\langle n\rangle$, 那么称$K$的特征为$n>0$.
+记$K$的特征为$\ch{K}$.
+容易证明, 当$\ch{K}=0$时, $K$一定包含$\mathbb{Q}$作为子域;
+当$\ch{K}>0$时, $K$的特征一定是素数 (设为$p$), 且包含$\mathbb{Z}/p\mathbb{Z}=\mathbb{F}_p$作为子域.
+我们将$\mathbb{Q}$与$\mathbb{F}_p$ ($p$素数)称为\textbf{素域}.
+
+假设$F$是有限域, 那么$F$一定有正的特征$p>0$.
+那么此时素域$\mathbb{F}_p\subset F$, $F$是$\mathbb{F}_p$上的向量空间.
+如果$\dim_{\mathbb{F}_p}F=n$, 那么每个坐标分量有$p$种取法, 则$|F|=p^n$.
+因此我们得到
+\begin{prop}
+    有限域$F$的阶为$p^n$, 其中$p=\ch{F}$是素数, $n=[F:\mathbb{F}_p]$.
+\end{prop}
+
+相同的论证我们可以得到
+\begin{prop}\label{finite subfield}
+    有限域$\mathbb{F}_{p^n}\subset\mathbb{F}_{p^m}$当且仅当$n|m$.
+\end{prop}
+
+\begin{sym}
+    对素数$p$, 在上下文意义明确时我们记它的一个方幂$p^n:=q$.
+    对$q$阶有限域, 我们将其记为$\GF(q)=\GF(p^n)=\mathbb{F}_q=\mathbb{F}_{p^n}$.\footnote{似乎这需要先证明有限域是唯一的, 不过这件事情之后我们确实会做.}
+\end{sym}
+
+首先我们证明有限域的存在性.
+\begin{thm}
+    对素数$p$及$q=p^n$, 存在$q$阶有限域.
+\end{thm}
+\begin{proof}
+    取$x^q-x$在$\mathbb{F}_p$上的一个分裂域$L$, 我们证明$L$恰好由$x^q-x$的所有根构成.
+    我们先证明$x^q-x$的根构成一个域.
+    对根$x,y$, 由$\ch L=p$可知$\binom{q}{k}=0,\ k=1,\cdots,q-1$, 从而
+    \begin{align*}
+        (x-y)^q&=x^q-y^q\quad(p=2\text{时}1=-1,\ \text{所以均写为减号})\\
+        &=x-y
+    \end{align*}
+    所以$x-y$是$x^q-x$的一个根;
+    而当$y\neq 0$时
+    \begin{align*}
+        \left(\frac{x}{y}\right)^q-\frac{x}{y}&=\frac{x^qy-xy^q}{y^{q+1}}\\
+        &=\frac{xy-yx}{y^{q+1}}\\
+        &=0
+    \end{align*}
+    所以$x/y$也是一个根.
+    因此$x^q-x$的根在减法与除法下封闭, 构成一个域.
+    由于分裂域由根生成, 所以$L$恰好由$x^q-x$的根构成.
+    另一方面, 由于$(x^q-x)'=qx^{q-1}-1=-1$, 与$x^q-x$互素, 所以$x^q-x$没有重根.
+    因此$|L|=\deg(x^q-x)=q$.
+\end{proof}
+
+然后我们证明有限域的唯一性.
+\begin{thm}
+    两个有限域同构当且仅当他们阶数相同.
+\end{thm}
+\begin{proof}
+    设有限域$F$的阶数为$q$, 我们证明$F$一定是$x^q-x$的分裂域.
+    这只需要证明对任意$a\in F$有$a^q=a$即可.
+    $a=0$时这是平凡的.
+    对$a\in F^*$, 由Lagrange定理, $a^{|F^*|}=1$, 即$a^{q-1}=1$, 从而$a^q=a$.
+    因此$F$是$x^q-x$的分裂域, 在同构意义下是唯一的.
+\end{proof}
+
+对于给定的$q$, 我们希望问
+\begin{pro}
+    如何构造$q$阶有限域?
+\end{pro}
+回答很简单, 我们取一个$n$次不可约多项式$f(x)\in\mathbb{F}_p[x]$, 那么就有$\GF(q)=\mathbb{F}_p[x]/\langle f(x)\rangle$.
+我们看一个例子.
+
+\begin{eg}
+    给定$p=2$.
+    我们写一些低次数的不可约多项式:
+    \begin{gather*}
+        x,\ x+1,\\
+        x^2+x+1,\\
+        x^3+x+1,\ x^3+x^2+1,\\
+        x^4+x+1,\ x^4+x^3+x^2+x+1,\ x^4+x^3+1
+    \end{gather*}
+    那么我们有
+    \begin{enumerate}[(1)]
+        \item 次数为$4=2^2$: $\GF(4)=\mathbb{F}_2[x]/\langle x^2+x+1\rangle$, 习惯上把$x$记为三次单位根$\omega$, 域中的元素为
+        \[0,1,\omega,\omega+1\]
+        \item 次数为$8=2^3$: $\GF(8)=\mathbb{F}_2[x]/\langle x^3+x+1\rangle$, 此时域中的元素为
+        \[0,1,x,x+1,x^2,x^2+1,x^2+x,x^2+x+1\]
+        同时也有$\GF(8)=\mathbb{F}_2[y]/\langle y^3+y^2+1\rangle$, 这两种构造下的域应当是同构的.
+        事实上, 注意到$(y+1)^3+(y+1)+1=0$, 所以同构映射可以由$x=y+1$给出.
+    \end{enumerate}
+\end{eg}
+
+通过以上这个例子, 我们可以看出确实没有``典范''的构造有限域的方法.
+
+最后, 我们讨论求有限域上不可约多项式的个数的问题.
+我们只在有限素域上考虑这个问题.
+
+\begin{prop}\label{counting}
+    设$F_d$(x)是$\mathbb{F}_p$上所有$d$次不可约多项式的乘积, 那么有
+    \[x^{p^n}-x=\prod_{d|n}F_d(x)\]
+\end{prop}
+\begin{lem}
+    $\mathbb{F}_p[x]$中的不可约多项式均没有重根.
+\end{lem}
+\begin{proof}
+    设$f(x)\in\mathbb{F}_p[x]$不可约.
+    如果$f'(x)\neq 0$, 那么$(f(x),f'(x))=1$, 从而$f(x)$没有重根.
+    如果$f'(x)=0$, 那么$f(x)$一定具有形式 (不妨设首一)
+    \begin{align*}
+        f(x)&=x^{np}+a_{n-1}x^{(n-1)p}+\cdots+a_1x^p+a_0\\
+        &=(x^n+a_{n-1}x^{n-1}+\cdots+a_0)^p
+    \end{align*}
+    与$f(x)$不可约矛盾.
+    所以$f(x)$没有重根.
+\end{proof}
+\begin{proof}[命题~\ref{counting}~的证明]
+    首先我们说明如果次数至少为$1$的多项式$f(x)|x^{p^n}-x$, 那么$f^2(x)\nmid x^{p^n}-x$.
+    事实上如果有$x^{p^n}-x=f^2(x)g(x)$, 那么计算形式导数有
+    \[-1=2f(x)f'(x)g(x)+f^2(x)g'(x)\]
+    从而$f(x)|1$, 矛盾.
+    其次我们说明$f(x)|x^{p^n}-x$当且仅当$d=\deg{f(x)}|n$.
+    设$L$是$x^{p^n}-x$的分裂域, 即$\GF(p^n)$.
+    对$f(x)$的一个根$\alpha$, 考虑$\mathbb{F}_p(\alpha)$.
+    那么$[\mathbb{F}_p(\alpha):\mathbb{F}_p]=d$, 由命题~\ref{finite subfield}, $\mathbb{F}_p(\alpha)\subset L$当且仅当$d|n$, 即$x-\alpha|x^{p^n}-x$当且仅当$d|n$.
+    因此$f(x)|x^{p^n}-x$时一定有$x-\alpha|x^{p^n}-x$, 从而$d|n$;
+    $d|n$时$f(x)$ (在$L$上) 的所有根$\alpha,\beta,\cdots$满足$x-\alpha,x-\beta,\cdots$均整除$x^{p^n}-x$, 又因为$f(x)$没有重根, 这些一次因式两两互素, 有$f(x)|x^{p^n}-x$.
+    综上可知命题成立.
+\end{proof}
+
+对命题~\ref{counting}~使用M\"{o}bius变换 (\parencite[第2章定理2]{NT}), 我们可以得到
+\begin{thm}
+    $\mathbb{F}_p[x]$上$n$次不可约多项式的个数为
+    \[\frac{1}{n}\sum_{d|n}\mu\left(\frac{n}{d}\right)p^d\]
+\end{thm}
+
+\begin{col}
+    对任意正整数$n$, $\mathbb{F}_p[x]$中存在$n$次不可约多项式.
+\end{col}
+\begin{proof}
+    $n$次不可约多项式的个数为$n^{-1}(p^n\pm\cdots+p\mu(n))$, 括号中的式子被$p$恰整除 (即$p^2$不整除这个式子), 所以一定不是$0$.
+\end{proof}
