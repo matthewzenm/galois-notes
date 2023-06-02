@@ -1,0 +1,109 @@
+\section{正规扩张与可分扩张}
+对于一个代数扩张$L/K$及$K$上的一个多项式$p(x)\in K[x]$, 假设$L$中包含了$p(x)$的一个根.
+那么我们会问, $L$包含了$p(x)$的所有根吗?
+看以下两个例子.
+\begin{eg}
+    取底域为$\mathbb{Q}$.
+    \begin{enumerate}[(1)]
+        \item $p(x)=x^3-2$在$\mathbb{Q}(\sqrt[3]{2})$上有一个根, 但是$\mathbb{Q}(\sqrt[3]{2})$不包含$x^3-2$的复根;
+        \item $p(x)=8x^3+4x^2+4x-1$, 取$\alpha=\cos{2\pi/7}$, 那么$\alpha$是$p(x)$的一个根.
+        而$p(x)$的另外两个根为$\cos{4\pi/7}=2a^2-1,\cos{6\pi/7}=2(2\alpha^2-1)^2-1$, 均在$\mathbb{Q}(\alpha)$中.
+    \end{enumerate}
+\end{eg}
+
+以下我们给出关于代数扩张的三个等价命题, 每一个命题都可以用来描述\textbf{正规扩张}.
+
+\begin{thm}\label{normal thmdef}
+    设$K\subset L$是代数扩张, 那么以下三个命题等价:
+    \begin{enumerate}[(1)]
+        \item $K[x]$中任何在$L$上有根的多项式$p(x)$在$L[x]$中分裂;
+        \item $L$是$K$上某一族多项式的分裂域;
+        \item $\overline{K}$的所有固定$K$不动的自同构都将$L$映为$L$.
+    \end{enumerate}
+\end{thm}
+
+\begin{defn}
+    满足定理~\ref{normal thmdef}~中三个等价条件中任意一个的代数扩张称为\textbf{正规扩张}.
+\end{defn}
+
+\begin{proof}[定理~\ref{normal thmdef}~的证明]
+    我们按照$(1)\implies(2)\implies(3)\implies(1)$的顺序证明它们等价.\\
+    $(1)\implies(2)$: 对任意$\alpha\in L$, 由于$L/K$是代数扩张, 因此可以取$\alpha$在$K$上的极小多项式$p_\alpha(x)$, 那么$L$是
+    \(S=\{p_\alpha\in K[x]:\ \alpha\in L\}\)
+    的分裂域.\\
+    $(2)\implies(3)$: 设$L$是$S\subset K[x]$的分裂域, $\sigma\in\Aut{\overline{K}}$固定$K$不动.
+    那么$\sigma$也固定$S$中多项式的系数不动, 从而$S$中多项式的根也被固定不动.
+    而$L$是$S$中多项式的根的分裂域, 所以也被固定不动.\\
+    $(3)\implies(1)$: 设$p(x)\in K[x]$具有一个根$\alpha\in L$, 不妨设$p(x)$不可约.
+    设$\beta\in\overline{K}$是$p(x)$的另一个根, 由于$p(x)$不可约, 所以存在固定$K$不动的同构$K(\alpha)\to K(\beta)$.
+    按照同构延拓定理 (定理~\ref{iso ext thm}), 这个同构可以延拓为$\overline{K}$的自同构$\sigma:\overline{K}\to\overline{K}$
+    \[\begin{tikzcd}
+        K \ar[d, "="] \ar[r] & K(\alpha) \ar[d, "\sim"] \ar[r] & \overline{K} \ar[d, "\sigma"]\\
+        K \ar[r] & K(\beta) \ar[r] & \overline{K}
+    \end{tikzcd}\]
+    那么按照假设, $\sigma$将$L$中的$\alpha$映成$L$中的$\beta$, 即$\beta\in L$.
+    从而$p(x)$的根均在$L$中, $p(x)$在$L[x]$中分裂.
+\end{proof}
+
+\begin{eg}我们再看几个例子.
+    \begin{enumerate}[(1)]
+        \item 我们在前面知道了$\mathbb{Q}(\sqrt[3]{2})/\mathbb{Q}$不是正规的, 但$\mathbb{Q}(\sqrt[3]{2},\omega)/\mathbb{Q}$是正规的.
+        \item 如果$K\subset L$且$[L:K]=2$, 那么$L/K$一定是正规的:
+        $L$一定是单生成的, 否则存在三个$K$--线性无关的元素$1,\alpha,\beta$, 矛盾.
+        那么设$L=K(\alpha)$, 由于$[L:k]=2$, $\alpha$的极小多项式是二次的, 不妨设为$x^2+bx+c$.
+        从而极小多项式的另一个根为$-b-\alpha\in L$, 所以极小多项式在$L[x]$中分裂, $L/K$是正规的.
+        \item 假设$L/K,M/L$都是正规扩张, 那么$M/K$是正规扩张吗?
+        答案是否定的, 一个简单的例子是$\mathbb{Q}\subset\mathbb{Q}(\sqrt{2})\subset\mathbb{Q}(\sqrt[4]{2})$.
+    \end{enumerate}
+\end{eg}
+
+接下来我们给出可分多项式, 可分元及可分扩张的定义.
+\begin{defn}
+    设$K$是域, $f(x)\in K[x]$, 如果$f(x)$在$\overline{K}$中没有重根, 那么称$f(x)$是一个\textbf{可分多项式}.
+    如果$K\subset L$, $\alpha\in L$是一个可分多项式的根, 那么称$\alpha$是\textbf{可分元}.
+    如果$L/K$中每个元素都是可分的, 那么称$L/K$是\textbf{可分扩张}.
+\end{defn}
+
+可分多项式的一个简单的判别法是
+\begin{prop}
+    $f(x)\in K[x]$是可分多项式当且仅当它的形式导数$f'(x)$与其互素.
+\end{prop}
+\begin{proof}
+    设$\alpha$是$f(x)$的一个根, 那么$f(x)$ (在分裂域或者代数闭包上) 有分解
+    \[f(x)=(x-\alpha)^{n_1}f_1(x),\ f_1(\alpha)\neq 0\]
+    当$n_1\geq 2$时, 求导有
+    \[f'(x)=n_1(x-\alpha)^{n_1-1}f_1(x)+(x-\alpha)^{n_1}f_1'(x)\]
+    仍被$x-\alpha$整除, 从而$x-\alpha|(f,f')$, 两者不互素.
+    当$n_1=1$时, 求导的结果为
+    \[f'(x)=f_1(x)+(x-\alpha)^{n_1}f_1'(x)\]
+    此时$f'(\alpha)=f_1(\alpha)\neq 0$, 从而$x-\alpha\nmid f'(x)$.
+    那么当$f$可分时, $f$的任意根都不是$f'$的根, 从而$(f,f')=1$.
+\end{proof}
+
+\begin{eg}我们给出一些可分或不可分扩张的例子.
+    \begin{enumerate}[(1)]
+        \item 设$K\subset L$是代数扩张, $\ch{K}=0$, 那么$L$是可分扩张.
+        事实上, 对任意$\alpha\in L$, 取$\alpha$在$K$上的极小多项式$f(x)$, 那么$f(x)$在$K$上是不可约的.
+        从而对非零的$f'(x)$一定有$(f,f')=1$, 即$\alpha$的极小多项式可分, $\alpha$是可分元.
+        \item 而当$\ch{K}>0$时, $K$的代数扩张不一定是可分的.
+        因为此时$f'(x)$可以是$0$, 比如$f(x)=a_nx^{np}+a_{n-1}x^{(n-1)p}+\cdots+a_0$.
+        具体地举一个例子, 设$k$是一个特征$p$的域, 取$K=k(t^p),L=k(t)$, 其中$t$是$k$上的超越元.
+        那么$L/K$是有限扩张, 从而是代数的.
+        但$t$不是可分元: $t$在$K$上具有极小多项式$x^p-t^p$, 但$x^p-t^p=(x-t)^p$只有一个根.
+        \item 有限域的代数扩张都是可分的.
+        事实上设$\alpha$是$\mathbb{F}_q$上的代数元, 设其是$n$次的, 那么$[\mathbb{F}_q(\alpha):\mathbb{F}_q]=n$.
+        从而$\alpha$是多项式$f(x)=x^{q^n}-x$的根, 而$f'(x)=-1$, 与$f(x)$互素, 从而$f(x)$可分, 则$\alpha$可分.
+    \end{enumerate}
+\end{eg}
+
+而对于不可分扩张, 最极端的情况是如下定义的纯不可分扩张
+\begin{defn}
+    设$K\subset L$, $\ch{K}=p$, 如果对任意$\alpha\in L$, $\alpha$都是$K$上某个多项式$x^{p^n}-a$的根, 那么称$L/K$是\textbf{纯不可分扩张}.
+\end{defn}
+
+对一般的代数扩张, 我们有如下命题
+\begin{thm}
+    设$L/K$是代数扩张, 那么$L/K$可以分解为$K\subset K^{\mathrm{sep}}\subset L$, 使得$K^{\mathrm{sep}}/K$是可分扩张, $L/K^{\mathrm{sep}}$是纯不可分扩张.
+    $K^{\mathrm{sep}}$称为$K$的\textbf{可分闭包}.
+\end{thm}
+由于本笔记中只处理可分扩张, 所以这个命题的证明我们直接引用~\parencite[第V章, 命题6.6]{Lang}
